@@ -40,10 +40,12 @@ const CreateClassDialog = ({ handleClose, open, classes, setClasses }) => {
         avatar: classAvatar,
       })
       .then((res) => {
-        setOpenSnackbar(true);
-        setClasses((prev) => [res.data, ...prev]);
-        resetState();
-        handleClose();
+        if (res) {
+          setOpenSnackbar(true);
+          setClasses((prev) => [res.data, ...prev]);
+          resetState();
+          handleClose();
+        }
       })
       .catch((error) => setError(error.response.data.message))
       .finally(() => {
