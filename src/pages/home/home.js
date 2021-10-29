@@ -42,17 +42,17 @@ const CreateClassDialog = ({ handleClose, open, classes, setClasses }) => {
       .then((res) => {
         setOpenSnackbar(true);
         setClasses((prev) => [res.data, ...prev]);
-      })
-      .catch((error) => setError(error))
-      .finally(() => {
-        setLoading(false);
         resetState();
         handleClose();
+      })
+      .catch((error) => setError(error.response.data.message))
+      .finally(() => {
+        setLoading(false);
       });
   };
   return (
     <>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open}>
         <DialogContent>
           <Box
             style={{ minWidth: 300, display: "flex", flexDirection: "column" }}
@@ -97,7 +97,10 @@ const CreateClassDialog = ({ handleClose, open, classes, setClasses }) => {
           <Button
             color="inherit"
             variant="contained"
-            onClick={() => handleClose()}
+            onClick={() => {
+              resetState();
+              handleClose();
+            }}
             size="small"
           >
             Huỷ
