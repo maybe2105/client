@@ -186,11 +186,19 @@ const HomePage = () => {
       >
         Tạo lớp mới
       </Button>
-
+      <Typography style={{ fontWeight: 600, margin: "16px 0px" }}>
+        Danh sách lớp
+      </Typography>
       <Grid container spacing={2}>
-        {classes.map((data) => {
-          return <ClassItem data={data} />;
-        })}
+        {classes.length ? (
+          classes.map((data) => {
+            return <ClassItem data={data} />;
+          })
+        ) : (
+          <Typography style={{ margin: "16px 48px", color: "#1e88e5" }}>
+            Đang tải danh sách lớp....
+          </Typography>
+        )}
       </Grid>
       <CreateClassDialog
         open={open}
